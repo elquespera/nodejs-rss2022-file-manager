@@ -5,6 +5,7 @@ import { parseUserName, showInvalidInputMessage,
         showWecomeMessage, showCurrentDirMessage, showOperationFailedMessage } from "./messages.js";
 import { doExit, setOnExit } from "./exit.js";
 import { currentDir, up, cd, ls } from './dir.js';
+import osInfo from './os-info.js';
 
 
 const validCommands = {
@@ -12,7 +13,7 @@ const validCommands = {
     'up': up,
     'cd': cd,
     'ls': ls,
-    'os': ''
+    'os': 'osInfo',
 }
 
 parseUserName();
@@ -31,13 +32,14 @@ readLine.on('line', line => {
     if (commandFunc) {
         commandFunc(...command.slice(1)).
         then(data => {
-            if (data) {
+            if (data) 
                 console.log(data);
-            }
-            showCurrentDirMessage(currentDir)
-        }, showOperationFailedMessage);
+            showCurrentDirMessage(currentDir);
+        }, error => {
+            showOperationFailedMessage();
+        });
+
     } else {
-        console.log('parsing error');
         showInvalidInputMessage();
     }
 });

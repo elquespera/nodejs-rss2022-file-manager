@@ -1,5 +1,7 @@
 let userName = '';
 
+const invalidInputError = new Error('Invalid input');
+
 const parseUserName = () => {
     const userNamePrefix = '--username=';
     const userNameArg = process.argv.find(arg => arg.startsWith(userNamePrefix));
@@ -15,7 +17,7 @@ const showExitMessage = () => {
 }
 
 const showInvalidInputMessage = () => {
-    console.log(`Invalid input`);
+    console.log(invalidInputError.message);
 }
 
 const showOperationFailedMessage = () => {
@@ -26,6 +28,7 @@ const showCurrentDirMessage = (dir) => {
     console.log(`You are currently in ${dir}`);
 }
 
-export { parseUserName, showWecomeMessage, showExitMessage, 
+export { invalidInputError, parseUserName, showWecomeMessage, 
+        showExitMessage, 
          showInvalidInputMessage, showOperationFailedMessage,
          showCurrentDirMessage };
