@@ -1,9 +1,17 @@
+let userName = '';
 
-const showWecomeMessage = (userName) => {
-    console.log(`Welcome to the File Manager, ${userName}`);
+const parseUserName = () => {
+    const userNamePrefix = '--username=';
+    const userNameArg = process.argv.find(arg => arg.startsWith(userNamePrefix));
+    userName = userNameArg.slice(userNamePrefix.length);
 }
 
-const showExitMessage = (userName) => {
+
+const showWecomeMessage = () => {
+    console.log(`Welcome to the File Manager, ${userName}!`);
+}
+
+const showExitMessage = () => {
     console.log(`Thank you for using File Manager, ${userName}`);
 }
 
@@ -15,5 +23,5 @@ const showOperationFailedMessage = () => {
     console.log(`Operation failed`);
 }
 
-export { showWecomeMessage, showExitMessage, 
-        showInvalidInputMessage, showOperationFailedMessage };
+export { parseUserName, showWecomeMessage, showExitMessage, 
+         showInvalidInputMessage, showOperationFailedMessage };
