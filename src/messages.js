@@ -22,5 +22,10 @@ const showOperationFailedMessage = () => {
     console.log(`Operation failed`);
 }
 
+const showCurrentDirMessage = (dir) => {
+    console.log(`You are curretly in ${dir}`);
+}
+
 export { parseUserName, showWecomeMessage, showExitMessage, 
-         showInvalidInputMessage, showOperationFailedMessage };
+         showInvalidInputMessage, showOperationFailedMessage,
+         showCurrentDirMessage };
