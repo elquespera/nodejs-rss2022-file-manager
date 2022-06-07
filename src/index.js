@@ -2,7 +2,8 @@ import * as readline from 'node:readline';
 
 import parseCommand from "./parseCommand.js";
 import { parseUserName, showInvalidInputMessage, 
-        showWecomeMessage, showCurrentDirMessage, showOperationFailedMessage } from "./messages.js";
+        showWecomeMessage, showCurrentDirMessage, 
+        showOperationFailedMessage, InvalidInputError } from "./messages.js";
 import { doExit, setOnExit } from "./exit.js";
 import { currentDir, up, cd, ls } from './dir.js';
 import osInfo from './os-info.js';
@@ -36,7 +37,11 @@ readLine.on('line', line => {
                 console.log(data);
             showCurrentDirMessage(currentDir);
         }, error => {
-            showOperationFailedMessage();
+            if (error instanceof InvalidInputError) {
+                showInvalidInputMessage();
+            } else {
+                showOperationFailedMessage();
+            }
         });
 
     } else {

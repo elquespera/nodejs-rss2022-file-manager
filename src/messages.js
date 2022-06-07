@@ -1,6 +1,12 @@
 let userName = '';
 
-const invalidInputError = new Error('Invalid input');
+class InvalidInputError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "ValidationError";
+    }
+}
+const invalidInputErrorMsg = 'Invalid input';
 
 const parseUserName = () => {
     const userNamePrefix = '--username=';
@@ -17,7 +23,7 @@ const showExitMessage = () => {
 }
 
 const showInvalidInputMessage = () => {
-    console.log(invalidInputError.message);
+    console.log(invalidInputErrorMsg);
 }
 
 const showOperationFailedMessage = () => {
@@ -28,7 +34,7 @@ const showCurrentDirMessage = (dir) => {
     console.log(`You are currently in ${dir}`);
 }
 
-export { invalidInputError, parseUserName, showWecomeMessage, 
+export { InvalidInputError, parseUserName, showWecomeMessage, 
         showExitMessage, 
          showInvalidInputMessage, showOperationFailedMessage,
          showCurrentDirMessage };
