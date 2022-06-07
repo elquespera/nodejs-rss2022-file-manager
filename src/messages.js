@@ -6,13 +6,12 @@ const parseUserName = () => {
     userName = userNameArg.slice(userNamePrefix.length);
 }
 
-
 const showWecomeMessage = () => {
     console.log(`Welcome to the File Manager, ${userName}!`);
 }
 
 const showExitMessage = () => {
-    console.log(`Thank you for using File Manager, ${userName}`);
+    console.log(`Thank you for using File Manager, ${userName}!`);
 }
 
 const showInvalidInputMessage = () => {
