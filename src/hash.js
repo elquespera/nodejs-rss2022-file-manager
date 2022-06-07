@@ -7,6 +7,7 @@ import { InvalidInputError } from "./messages.js";
 
 export default async function hash(fileName) {
     try {
+        // Try to resolve the path to fileName
         const from = path.resolve(currentDir, fileName); 
 
         // Create hash transform stream

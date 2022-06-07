@@ -8,6 +8,7 @@ import { doExit, setOnExit } from "./exit.js";
 import { currentDir, up, cd, ls } from './dir.js';
 import osInfo from './os-info.js';
 import hash from './hash.js';
+import { compress, decompress } from './archive.js';
 
 
 const validCommands = {
@@ -17,6 +18,8 @@ const validCommands = {
     'ls': ls,
     'os': osInfo,
     'hash': hash,
+    'compress': compress,
+    'decompress': decompress
 }
 
 parseUserName();
