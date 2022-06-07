@@ -7,6 +7,7 @@ import { parseUserName, showInvalidInputMessage,
 import { doExit, setOnExit } from "./exit.js";
 import { currentDir, up, cd, ls } from './dir.js';
 import osInfo from './os-info.js';
+import hash from './hash.js';
 
 
 const validCommands = {
@@ -15,6 +16,7 @@ const validCommands = {
     'cd': cd,
     'ls': ls,
     'os': osInfo,
+    'hash': hash,
 }
 
 parseUserName();
