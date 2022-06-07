@@ -13,7 +13,7 @@ const validCommands = {
     'up': up,
     'cd': cd,
     'ls': ls,
-    'os': 'osInfo',
+    'os': osInfo,
 }
 
 parseUserName();
