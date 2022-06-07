@@ -30,7 +30,6 @@ const performCompress = async (source, dest, compressStream) => {
        if (error instanceof TypeError) {
             throw new InvalidInputError();
         } else 
-            console.log(error);
             throw error;
     }
     finally {

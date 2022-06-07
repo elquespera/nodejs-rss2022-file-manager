@@ -10,7 +10,8 @@ import { currentDir, up, cd, ls } from './dir.js';
 import osInfo from './os-info.js';
 import hash from './hash.js';
 import { compress, decompress } from './archive.js';
-import { catFile, addFile } from './files.js';
+import { catFile, addFile, renameFile, 
+         copyFile, moveFile, removeFile } from './files.js';
 
 
 const validCommands = {
@@ -20,6 +21,10 @@ const validCommands = {
     'ls': ls,
     'cat': catFile,
     'add': addFile,
+    'rn': renameFile,
+    'cp': copyFile,
+    'mv': moveFile,
+    'rm': removeFile,
     'os': osInfo,
     'hash': hash,
     'compress': compress,
