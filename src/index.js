@@ -1,18 +1,19 @@
 import * as readline from 'node:readline';
-import * as os from "node:os";
 
 import parseCommand from "./parseCommand.js";
-import { parseUserName, showInvalidInputMessage, showWecomeMessage, showCurrentDirMessage } from "./messages.js";
+import { parseUserName, showInvalidInputMessage, 
+        showWecomeMessage, showCurrentDirMessage, showOperationFailedMessage } from "./messages.js";
 import { doExit, setOnExit } from "./exit.js";
-import { read } from 'node:fs';
+import { currentDir, up, cd, ls } from './dir.js';
 
 
 const validCommands = {
     '.exit': doExit, 
+    'up': up,
+    'cd': cd,
+    'ls': ls,
     'os': ''
 }
-
-const currentDir = os.homedir();
 
 parseUserName();
 showWecomeMessage();
@@ -28,9 +29,15 @@ readLine.on('line', line => {
     const command = parseCommand(line);    
     const commandFunc = validCommands[command[0]]; 
     if (commandFunc) {
-        commandFunc(...command.slice(1));
-        showCurrentDirMessage();
+        commandFunc(...command.slice(1)).
+        then(data => {
+            if (data) {
+                console.log(data);
+            }
+            showCurrentDirMessage(currentDir)
+        }, showOperationFailedMessage);
     } else {
+        console.log('parsing error');
         showInvalidInputMessage();
     }
 });
