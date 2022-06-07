@@ -4,11 +4,13 @@ import parseCommand from "./parseCommand.js";
 import { parseUserName, showInvalidInputMessage, 
         showWecomeMessage, showCurrentDirMessage, 
         showOperationFailedMessage, InvalidInputError } from "./messages.js";
+
 import { doExit, setOnExit } from "./exit.js";
 import { currentDir, up, cd, ls } from './dir.js';
 import osInfo from './os-info.js';
 import hash from './hash.js';
 import { compress, decompress } from './archive.js';
+import { catFile, addFile } from './files.js';
 
 
 const validCommands = {
@@ -16,6 +18,8 @@ const validCommands = {
     'up': up,
     'cd': cd,
     'ls': ls,
+    'cat': catFile,
+    'add': addFile,
     'os': osInfo,
     'hash': hash,
     'compress': compress,

@@ -9,8 +9,7 @@ import { InvalidInputError } from "./messages.js";
 
 //Perform compression or decompression
 const performCompress = async (source, dest, compressStream) => {
-    // console.log(source, dest, compressStream);
-    
+
     let sourceHandle, destHandle;
 
     try {
