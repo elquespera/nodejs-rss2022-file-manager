@@ -11,7 +11,7 @@ const invalidInputErrorMsg = 'Invalid input';
 const parseUserName = () => {
     const userNamePrefix = '--username=';
     const userNameArg = process.argv.find(arg => arg.startsWith(userNamePrefix));
-    userName = userNameArg.slice(userNamePrefix.length);
+    userName = userNameArg?.slice(userNamePrefix.length) || 'Noname';
 }
 
 const showWecomeMessage = () => {
