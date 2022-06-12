@@ -124,7 +124,6 @@ const removeFile = async (source) => {
         await fs.unlink(from);
     }
     catch (error) {
-        console.log(error);
        if (error instanceof TypeError) {
             throw new InvalidInputError();
         } else 
