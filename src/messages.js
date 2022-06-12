@@ -1,5 +1,6 @@
 let userName = '';
 
+// Custom class for invalid input error
 class InvalidInputError extends Error {
     constructor(message) {
         super(message);

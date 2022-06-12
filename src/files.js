@@ -11,6 +11,10 @@ const catFile = async (source) => {
     let fileHandle;
 
     try {
+        //Throw custom error if no source path is provided
+        if (!source) 
+            throw new InvalidInputError();
+
         // Try to resolve the path to fileName
         const from = path.resolve(currentDir, source); 
 
@@ -28,10 +32,7 @@ const catFile = async (source) => {
         return lines;
     }
     catch(error) {
-        if (error instanceof TypeError) {
-            throw new InvalidInputError();
-        } else 
-            throw error;
+        throw error;
     } 
     finally {
         await fileHandle?.close();
@@ -42,6 +43,10 @@ const addFile = async (dest) => {
     let fileHandle;
 
     try {
+        //Throw custom error if no destination path is provided
+        if (!dest) 
+            throw new InvalidInputError();  
+
         // Try to resolve the path to fileName
         const to = path.resolve(currentDir, dest); 
 
@@ -49,10 +54,7 @@ const addFile = async (dest) => {
         fileHandle = await fs.open(to, 'wx');
     }
     catch(error) {
-        if (error instanceof TypeError) {
-            throw new InvalidInputError();
-        } else 
-            throw error;
+        throw error;
     } 
     finally {
         await fileHandle?.close();
@@ -61,6 +63,10 @@ const addFile = async (dest) => {
 
 const renameFile = async (source, dest) => {
     try {
+        //Throw custom error if no source or destination path is provided
+        if (!source || !dest) 
+            throw new InvalidInputError();
+
         // Try to resolve the paths
         const from = path.resolve(currentDir, source); 
         const to = path.resolve(currentDir, dest);
@@ -69,11 +75,7 @@ const renameFile = async (source, dest) => {
         await fs.rename(from, to);   
     }
     catch(error) {
-        if (error instanceof TypeError) {
-            throw new InvalidInputError();
-        }
-        else
-            throw error;
+        throw error;
     } 
 }
 
@@ -81,6 +83,10 @@ const copyFile = async (source, dest) => {
     let sourceHandle, destHandle;
 
     try {
+        //Throw custom error if no source or destination path is provided
+        if (!source || !dest) 
+            throw new InvalidInputError();
+
         // Try to resolve the path to fileName
         const from = path.resolve(currentDir, source); 
         const to = path.resolve(currentDir, dest);
@@ -94,10 +100,7 @@ const copyFile = async (source, dest) => {
         );
     }
     catch (error) {
-       if (error instanceof TypeError) {
-            throw new InvalidInputError();
-        } else 
-            throw error;
+       throw error;
     }
     finally {
         await sourceHandle?.close();
@@ -107,6 +110,7 @@ const copyFile = async (source, dest) => {
 
 const moveFile = async (source, dest) => {
     try {
+        //Reuse copy & remove file functions
         await copyFile(source, dest);
         await removeFile(source, dest);
     }
@@ -117,6 +121,10 @@ const moveFile = async (source, dest) => {
 
 const removeFile = async (source) => {
     try {
+        //Throw custom error if no source path is provided
+        if (!source) 
+            throw new InvalidInputError();
+
         // Try to resolve the path to fileName
         const from = path.resolve(currentDir, source); 
 

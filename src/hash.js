@@ -5,10 +5,14 @@ const { createHash } = await import('crypto');
 import { currentDir } from "./dir.js";
 import { InvalidInputError } from "./messages.js";
 
-export default async function hash(fileName) {
+export default async function hash(source) {
     try {
+        //Throw custom error if no source or destination path is provided
+        if (!source) 
+            throw new InvalidInputError();
+
         // Try to resolve the path to fileName
-        const from = path.resolve(currentDir, fileName); 
+        const from = path.resolve(currentDir, source); 
 
         // Create hash transform stream
         const hashStream = createHash('sha256');
@@ -23,9 +27,6 @@ export default async function hash(fileName) {
         return hashStream.digest('hex');
     }
     catch(error) {
-        if (error instanceof TypeError) {
-            throw new InvalidInputError();
-        } else 
-            throw error;
+        throw error;
     } 
 }

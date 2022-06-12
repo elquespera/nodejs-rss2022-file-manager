@@ -42,18 +42,30 @@ const readLine = readline.createInterface(process.stdin, process.stdout);
 
 // Main loop for per-line input
 readLine.on('line', line => {
+    // Parse command into an array, quotes around paths supported
     const command = parseCommand(line);    
+
+    // Check if an appopriate function exists for the given command
     const commandFunc = validCommands[command[0]]; 
     if (commandFunc) {
+
+        // Run the command with the parameters passed as array
+        // Superfluous parameters are ignored
         commandFunc(...command.slice(1)).
         then(data => {
+            // If there's data associated with the command,
+            // output it to console.log
             if (data) 
                 console.log(data);
+
+            // Output current directory after
             showCurrentDirMessage(currentDir);
         }, error => {
+            // Check if error is Invalid Input
             if (error instanceof InvalidInputError) {
                 showInvalidInputMessage();
             } else {
+                // Else must be a file operation failure
                 showOperationFailedMessage();
             }
         });

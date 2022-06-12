@@ -17,7 +17,7 @@ export default async function osInfo(flag) {
             case 'homedir':
                 return os.homedir();
             case 'username':
-                return os.userInfo()?.username;
+                return os.userInfo().username;
             case 'architecture':
                 return os.arch();
             default:

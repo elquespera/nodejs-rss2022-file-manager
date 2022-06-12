@@ -1,6 +1,9 @@
 export default function parseCommand(command) {
-    //Split command by spaces, at least one
+    // Split command by spaces, at least one
     command = command.trim().split(/ +/);
+
+    // Check for quotes around file names, single & double supported
+    // no nesting support
     if (command.length > 1) {
         const parameters = [];
         let openingQuoteIndex = -1;

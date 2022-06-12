@@ -13,6 +13,10 @@ const performCompress = async (source, dest, compressStream) => {
     let sourceHandle, destHandle;
 
     try {
+        //Throw custom error if no source or destination path is provided
+        if (!source || !dest) 
+            throw new InvalidInputError();
+
         // Try to resolve the path to fileName
         const from = path.resolve(currentDir, source); 
         const to = path.resolve(currentDir, dest);
@@ -27,10 +31,7 @@ const performCompress = async (source, dest, compressStream) => {
         );
     }
     catch (error) {
-       if (error instanceof TypeError) {
-            throw new InvalidInputError();
-        } else 
-            throw error;
+       throw error;
     }
     finally {
         await sourceHandle?.close();

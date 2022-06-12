@@ -1,20 +1,21 @@
 import * as os from "node:os";
 import * as path from "node:path";
 import  *  as fs from 'node:fs/promises';
-import { resolve } from "node:path";
-import { dir } from "node:console";
+import { InvalidInputError } from "./messages.js";
+
+
 
 const homeDir = os.homedir();
 let currentDir = homeDir;
 
-const up = async () => {
-    currentDir = path.resolve(currentDir, '..');
-}
-
 const cd = async (newPath) => {
-    newPath = path.resolve(currentDir, newPath);
     let dir;
     try {
+        //Throw custom error if no path is provided
+        if (!newPath) 
+            throw new InvalidInputError();
+
+        newPath = path.resolve(currentDir, newPath);
         dir = await fs.opendir(newPath);
         currentDir = newPath;
     }
@@ -24,6 +25,11 @@ const cd = async (newPath) => {
     finally {
         dir?.close();
     }
+}
+
+const up = async () => {
+    // Go up level using cd function
+    await cd('..');
 }
 
 const ls = async () => {
