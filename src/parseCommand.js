@@ -9,14 +9,15 @@ export default function parseCommand(command) {
         let openingQuoteIndex = -1;
         for (let i = 1; i < command.length; i++) {
             if (openingQuoteIndex > 0) {
-                if (command[i].match(/("|')$/) || i === command.length) {
+                if (command[i].match(/("|')$/) || i === command.length - 1) {
                     if (!command[i].match(/("|')$/)) { 
                         command[i] += '"';
                     }
                     parameters.push(command
                                     .slice(openingQuoteIndex, i + 1)
                                     .join(' ')
-                                    .slice(1, -1));
+                                    .slice(1, -1)
+                    );
                     openingQuoteIndex = -1;
                 }
             } else

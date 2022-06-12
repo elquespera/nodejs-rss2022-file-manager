@@ -4,6 +4,9 @@ import { InvalidInputError } from './messages.js';
 export default async function osInfo(flag) {
     try {
         flag = flag.slice(2);
+        if (!flag || flag === '') {
+            throw new InvalidInputError();
+        }
         switch (flag) {
             case 'EOL':
                 return JSON.stringify(os.EOL);
